@@ -30,6 +30,7 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
         dn = dn.astype('float32')
 
     # now for the actual calculation
+    print((gain, absCalFactor, effectiveBandwidth, offset))
     radiance = gain * dn * absCalFactor / effectiveBandwidth + offset
 
     if rolled:
@@ -43,7 +44,7 @@ def get_parameters(mtd, band_ids=None):
     sat_id = mtd['satId']
     calvals = mtd['calibration_values']
     calkw = {k: np.array(calvals[k])[band_ids] for k in calvals}
-    gain = np.array(gain_offset.get_offset_values(sat_id))[band_ids]
+    gain = np.array(gain_offset.get_gain_values(sat_id))[band_ids]
     offset = np.array(gain_offset.get_offset_values(sat_id))[band_ids]
     return dict(calkw, gain=gain, offset=offset)
 

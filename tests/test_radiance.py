@@ -11,3 +11,4 @@ def test_dn_to_reflectance():
     out = radiance.dn_to_radiance(dn, imdfile, band_ids=[4, 3, 2])
     assert isinstance(out, np.ndarray)
     assert np.issubdtype(out.dtype, np.float)
+    assert np.sum(out > 0) > (out.size * 0.5)
