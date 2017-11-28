@@ -5,7 +5,7 @@ python:
 install:
   - pip install --upgrade pip setuptools wheel
   - pip install pytest codecov
-  - pip install --only-binary=numpy numpy affine shapely
+  - pip install --only-binary=numpy numpy affine shapely dateutil
   - pip install -e .[test]
 script:
   - coverage run --source=dg_calibration -m pytest -v
