@@ -30,7 +30,6 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
         dn = dn.astype('float32')
 
     # now for the actual calculation
-    print((gain, absCalFactor, effectiveBandwidth, offset))
     radiance = gain * dn * absCalFactor / effectiveBandwidth + offset
 
     if rolled:
