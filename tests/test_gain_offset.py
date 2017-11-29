@@ -1,3 +1,5 @@
+import pytest
+
 from dg_calibration import gain_offset as go
 
 
@@ -19,3 +21,15 @@ def test_get_offset_values():
         vv = go.get_gain_values(sat_id)
         assert isinstance(vv, list)
         assert isinstance(vv[0], float)
+
+
+def test_get_gain_values_keyerror():
+    sat_id = 'nosatisevercalledthis'
+    with pytest.raises(ValueError):
+        go.get_gain_values(sat_id)
+
+
+def test_get_offset_values_keyerror():
+    sat_id = 'nosatisevercalledthis'
+    with pytest.raises(ValueError):
+        go.get_offset_values(sat_id)
