@@ -1,3 +1,5 @@
+import pytest
+
 from dg_calibration import solar_irradiance as si
 
 
@@ -18,3 +20,10 @@ def test_get_solar_irradiance_values():
             assert isinstance(vv[0], float)
     vv = si.get_solar_irradiance_values(sat_id='WV01', source='Thuillier2003')
     assert len(vv) == 1
+
+
+def test_get_solar_irradiance_values_invalid_source():
+    for sat_id in si.CSV:
+        source = 'invalid_existing_source'
+        with pytest.raises(ValueError):
+            si.get_solar_irradiance_values(sat_id, source=source)

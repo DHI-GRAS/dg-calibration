@@ -23,13 +23,13 @@ def test_get_offset_values():
         assert isinstance(vv[0], float)
 
 
-def test_get_gain_values_keyerror():
+def test_get_gain_values_invalid_satid():
     sat_id = 'nosatisevercalledthis'
     with pytest.raises(ValueError):
         go.get_gain_values(sat_id)
 
 
-def test_get_offset_values_keyerror():
+def test_get_offset_values_invalid_satid():
     sat_id = 'nosatisevercalledthis'
     with pytest.raises(ValueError):
         go.get_offset_values(sat_id)
