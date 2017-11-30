@@ -2,6 +2,7 @@ import numpy as np
 
 from dg_calibration import metadata
 from dg_calibration import gain_offset
+from dg_calibration import bands
 
 
 def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
@@ -38,10 +39,14 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
 
 
 def get_parameters(mtd, band_ids=None):
+    if mtd['bandId'] != 'Multi':
+        raise NotImplementedError(
+            'Currently only supporting \'Multi\' (multispectral) metadata. Got \'{}\'.'
+            .format(mtd['bandId']))
     if band_ids is None:
         band_ids = slice(None, None)
     sat_id = mtd['satId']
-    calvals = mtd['calibration_values']
+    calvals = {k: bands.get_values_sorted(d, sat_id=sat_id) for k, d in mtd['calibration'].items()}
     calkw = {k: np.array(calvals[k])[band_ids] for k in calvals}
     gain = np.array(gain_offset.get_gain_values(sat_id))[band_ids]
     offset = np.array(gain_offset.get_offset_values(sat_id))[band_ids]

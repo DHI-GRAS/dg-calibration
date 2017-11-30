@@ -39,6 +39,10 @@ def calculate_reflectance(radiance, dsun, solar_irradiance, sun_zenith):
 
 
 def get_parameters(mtd, band_ids=None):
+    if mtd['bandId'] != 'Multi':
+        raise NotImplementedError(
+            'Currently only supporting \'Multi\' (multispectral) metadata. Got \'{}\'.'
+            .format(mtd['bandId']))
     if band_ids is None:
         band_ids = slice(None, None)
     sat_id = mtd['satId']

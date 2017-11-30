@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 
 from dg_calibration import reflectance
@@ -21,3 +22,10 @@ def test_dn_to_reflectance():
     assert isinstance(out, np.ndarray)
     assert np.issubdtype(out.dtype, np.float)
     assert np.sum(out > 0) > (out.size * 0.5)
+
+
+def test_radiance_to_reflectance_fail_PAN():
+    radiance = np.random.random((3, 20, 30))
+    imdfile = data.IMDFILES['WV04_PAN']
+    with pytest.raises(NotImplementedError):
+        reflectance.radiance_to_reflectance(radiance, imdfile, band_ids=[4, 3, 2])

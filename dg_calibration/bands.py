@@ -16,6 +16,6 @@ def get_values_sorted(bandsdict, sat_id):
     n_expected = NBANDS_MULT[sat_id]
     if len(values) != n_expected:
         raise ValueError(
-            'Expecting {} values for sat ID \'{}\'. Found {}.'
+            'Expecting {} multispectral values for sat ID \'{}\'. Found {}.'
             .format(n_expected, sat_id, len(values)))
     return values

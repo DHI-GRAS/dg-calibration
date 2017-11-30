@@ -3,8 +3,6 @@ import re
 import shapely.geometry
 import affine
 
-from dg_calibration import bands
-
 
 def _get_angles(image_meta):
     angles = {}
@@ -83,10 +81,7 @@ def postprocess_metadata(mtd_raw):
     mtd_postproc['sensing_time'] = (
         imgm['firstLineTime'] if 'firstLineTime' in imgm
         else mtd_raw['earliestAcqTime'])
-    mtd_postproc['calibration_bands'] = _get_calibration_constants(mtd_raw['band_meta'])
-    mtd_postproc['calibration_values'] = {
-        k: bands.get_values_sorted(d, sat_id=imgm['satId'])
-        for k, d in mtd_postproc['calibration_bands'].items()}
+    mtd_postproc['calibration'] = _get_calibration_constants(mtd_raw['band_meta'])
     mtd_postproc['transform'] = _get_transform(mtd_raw['projection_meta'])
     mtd_postproc['footprint_projected'] = _points_to_polygon(
         _get_points_xy(mtd_raw['projection_meta']))

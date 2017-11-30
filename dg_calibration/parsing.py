@@ -2,6 +2,7 @@ import re
 import dateutil.parser
 
 RENAME_BAND_GROUPS = {
+    'P': 'PAN',
     'C': 'COASTAL',
     'B': 'BLUE',
     'G': 'GREEN',
