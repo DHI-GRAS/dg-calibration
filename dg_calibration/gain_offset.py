@@ -106,8 +106,9 @@ OFFSET = {
 
 
 def get_gain_values(sat_id):
+    """Returns values for multispectral bands (see bands.BANDS_MULT)"""
     try:
-        return bands.get_values_sorted(GAIN[sat_id])
+        return bands.get_values_sorted(GAIN[sat_id], sat_id=sat_id)
     except KeyError:
         raise ValueError(
             'Satellite ID \'{}\' not supported. Choose from {}.'
@@ -115,8 +116,9 @@ def get_gain_values(sat_id):
 
 
 def get_offset_values(sat_id):
+    """Returns values for multispectral bands (see bands.BANDS_MULT)"""
     try:
-        return bands.get_values_sorted(OFFSET[sat_id])
+        return bands.get_values_sorted(OFFSET[sat_id], sat_id=sat_id)
     except KeyError:
         raise ValueError(
             'Satellite ID \'{}\' not supported. Choose from {}.'

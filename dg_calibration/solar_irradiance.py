@@ -1,3 +1,4 @@
+from dg_calibration import bands
 
 
 CSV = {
@@ -36,14 +37,14 @@ PAN;1610.73;1614.88;1619.49
 BLUE;1993.18;1966.03;1963.53
 GREEN;1828.83;1857.12;1855.25
 RED;1491.49;1500.38;1506.29
-NIR;1022.58;1029.61;1037.7
+NIR1;1022.58;1029.61;1037.7
     """,
     'QUICKBIRD': """
 PAN;1370.92;1376.3;1381.72
 BLUE;1949.59;1926.55;1924.62
 GREEN;1823.64;1844.26;1842.81
 RED;1553.78;1571.58;1574.65
-NIR;1102.85;1107.47;1113.72
+NIR1;1102.85;1107.47;1113.72
     """,
     'WV01': """
 PAN;1478.62;1481.48;1487.92
@@ -53,17 +54,12 @@ PAN;1353.25;1358.59;1364.06
 BLUE;1921.26;1902.54;1901.19
 GREEN;1803.28;1827.32;1826.04
 RED;1517.76;1526.48;1532.48
-NIR;1145.8;1150.51;1155.37
+NIR1;1145.8;1150.51;1155.37
     """}
 
 SOURCES = ['Thuillier2003', 'ChKur', 'WRC']
 
 DEFAULT_SOURCE = 'Thuillier2003'
-
-BAND_ORDER = [
-    'PAN', 'COASTAL', 'BLUE', 'GREEN', 'YELLOW', 'RED', 'REDEDGE',
-    'NIR1', 'NIR2', 'SIWR1', 'SIWR2', 'SIWR3', 'SIWR4', 'SIWR5',
-    'SIWR6', 'SIWR7', 'SIWR8']
 
 
 def _parse_csv(sat_id):
@@ -91,5 +87,6 @@ def get_solar_irradiance_dict(sat_id, source=DEFAULT_SOURCE):
 
 
 def get_solar_irradiance_values(sat_id, source=DEFAULT_SOURCE):
+    """Returns values for multispectral bands (see bands.BANDS_MULT)"""
     data = get_solar_irradiance_dict(sat_id=sat_id, source=source)
-    return [data[band] for band in BAND_ORDER if band in data]
+    return bands.get_values_sorted(data, sat_id=sat_id)
