@@ -10,7 +10,7 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
 
     Parameters
     ----------
-    dn : ndarray (nbands, ny, nx) or (ny, nx, nbands)
+    dn : ndarray (nbands, ny, nx)
         digital numbers data
     gain, offset : ndarray (nbands)
         gain and offset for all bands in dn data
@@ -22,19 +22,9 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
     ndarray
         radiance
     """
-    rolled = False
-    if dn.shape[-1] != len(gain):
-        dn = np.rollaxis(dn, 0, 3)
-        rolled = True
-
-    if not np.issubdtype(dn.dtype, np.float):
-        dn = dn.astype('float32')
-
-    # now for the actual calculation
-    radiance = gain * dn * absCalFactor / effectiveBandwidth + offset
-
-    if rolled:
-        radiance = np.rollaxis(radiance, 2, 0)
+    radiance = np.zeros(dn.shape, dtype='float32')
+    for b in range(dn.shape[0]):
+        radiance[b] = gain[b] * dn[b] * absCalFactor[b] / effectiveBandwidth[b] + offset[b]
     return radiance
 
 
