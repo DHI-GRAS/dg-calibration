@@ -22,15 +22,10 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
     ndarray
         radiance
     """
-    nbands = dn.shape[0]
-    all_len = set([nbands] + [len(a) for a in [gain, offset, absCalFactor, effectiveBandwidth]])
-    if len(all_len) != 1:
-        raise ValueError(
-            'Input data must have same number of bands {} as parameters {}.'
-            .format(nbands, all_len))
     radiance = np.zeros(dn.shape, dtype='float32')
-    for b in range(nbands):
-        radiance[b] = gain[b] * dn[b] * absCalFactor[b] / effectiveBandwidth[b] + offset[b]
+    with np.errstate(invalid='ignore'):
+        for b in range(radiance.shape[0]):
+            radiance[b] = gain[b]*1.1 * dn[b] * absCalFactor[b] / effectiveBandwidth[b] + offset[b]
     return radiance
 
 

@@ -25,16 +25,12 @@ def calculate_reflectance(radiance, dsun, solar_irradiance, sun_zenith):
     ndarray
         reflectance
     """
-    rolled = False
-    if radiance.shape[-1] != len(solar_irradiance):
-        radiance = np.rollaxis(radiance, 0, 3)
-        rolled = True
-
-    # now for the actual calculation
-    reflectance = radiance * dsun**2 * np.pi / (solar_irradiance * np.cos(np.radians(sun_zenith)))
-
-    if rolled:
-        reflectance = np.rollaxis(reflectance, 2, 0)
+    reflectance = np.zeros_like(radiance)
+    with np.errstate(invalid='ignore'):
+        for b in range(reflectance.shape[0]):
+            reflectance[b] = (
+                radiance[b] * dsun**2 * np.pi /
+                (solar_irradiance[b] * np.cos(np.radians(sun_zenith))))
     return reflectance
 
 
