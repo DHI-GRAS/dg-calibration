@@ -8,11 +8,12 @@ from . import data
 
 def test_dn_to_radiance():
     dn = np.random.randint(0, 6000, (3, 20, 30))
-    imdfile = data.IMDFILES['WV02']
-    out = radiance.dn_to_radiance(dn, imdfile, band_ids=[4, 3, 2])
-    assert isinstance(out, np.ndarray)
-    assert np.issubdtype(out.dtype, np.float)
-    assert np.sum(out > 0) > (out.size * 0.5)
+    for sat_id in ['WV02', 'WV04', 'GE01']:
+        imdfile = data.IMDFILES[sat_id]
+        out = radiance.dn_to_radiance(dn, imdfile, band_ids=[3, 2, 1])
+        assert isinstance(out, np.ndarray)
+        assert np.issubdtype(out.dtype, np.float)
+        assert np.sum(out > 0) > (out.size * 0.5)
 
 
 def test_dn_to_radiance_fail_PAN():
