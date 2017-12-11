@@ -33,6 +33,12 @@ GAIN = {
         'REDEDGE': 0.974,
         'NIR1': 0.961,
         'NIR2': 1.002},
+    'WV04': {  # Awaiting calibration results from DG RSS team
+        'PAN': 1.0,
+        'BLUE': 1.0,
+        'GREEN': 1.0,
+        'RED': 1.0,
+        'NIR1': 1.0},
     'GE01': {  # 2016v3.Int
         'PAN': 0.970,
         'BLUE': 1.053,
@@ -83,6 +89,12 @@ OFFSET = {
         'REDEDGE': -4.120,
         'NIR1': -3.300,
         'NIR2': -2.891},
+    'WV04': {  # Awaiting calibration results from DG RSS team
+        'PAN': 0.0,
+        'BLUE': 0.0,
+        'GREEN': 0.0,
+        'RED': 0.0,
+        'NIR1': 0.0},
     'GE01': {  # 2016v3.Int
         'PAN': -1.926,
         'BLUE': -4.537,
