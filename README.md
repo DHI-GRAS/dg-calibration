@@ -1,8 +1,8 @@
 # dg_calibration
 Coefficients and functions for calibrating DigitalGlobe imagery in Python
 
-[![Build Status](https://travis-ci.org/DHI-GRAS/dg-calibration.svg?branch=master)](https://travis-ci.org/DHI-GRAS/dg_calibration)
-[![codecov](https://codecov.io/gh/DHI-GRAS/dg-calibration/branch/master/graph/badge.svg)](https://codecov.io/gh/DHI-GRAS/dg_calibration)
+[![Build Status](https://travis-ci.org/DHI-GRAS/dg_calibration.svg?branch=master)](https://travis-ci.org/DHI-GRAS/dg_calibration)
+[![codecov](https://codecov.io/gh/DHI-GRAS/dg_calibration/branch/master/graph/badge.svg)](https://codecov.io/gh/DHI-GRAS/dg_calibration)
 
 Bascially a Python-implementation of https://dg-cms-uploads-production.s3.amazonaws.com/uploads/document/file/209/ABSRADCAL_FLEET_2016v0_Rel20170606.pdf with metadata parsing.
 
