@@ -25,7 +25,7 @@ def calculate_radiance(dn, gain, offset, absCalFactor, effectiveBandwidth):
     radiance = np.zeros(dn.shape, dtype='float32')
     with np.errstate(invalid='ignore'):
         for b in range(radiance.shape[0]):
-            radiance[b] = gain[b]*1.1 * dn[b] * absCalFactor[b] / effectiveBandwidth[b] + offset[b]
+            radiance[b] = gain[b] * dn[b] * absCalFactor[b] / effectiveBandwidth[b] + offset[b]
     return radiance
 
 
